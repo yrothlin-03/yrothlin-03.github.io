@@ -1,41 +1,125 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon CV</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon CV - Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
-    <img src="photo.jpg" alt="Photo">
-    <h1>Ton Nom</h1>
-    <p>Développeur / Designer / Étudiant</p>
+  <header class="hero">
+    <div>
+      <h1>Ton Prénom Nom</h1>
+      <p class="subtitle">Développeur / Étudiant / Data / IA</p>
+      <p class="intro">
+        Présentation courte : qui tu es, ce que tu fais, ce que tu recherches.
+        Exemple : étudiant en informatique passionné par le développement web,
+        l’intelligence artificielle et les projets open source.
+      </p>
+
+      <div class="links">
+        <a href="mailto:ton.email@example.com">Email</a>
+        <a href="https://github.com/tonpseudo" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/tonprofil" target="_blank">LinkedIn</a>
+        <a href="cv.pdf" target="_blank">CV PDF</a>
+      </div>
+    </div>
   </header>
 
-  <section>
-    <h2>À propos</h2>
-    <p>Petite présentation ici.</p>
-  </section>
+  <main>
 
-  <section>
-    <h2>Compétences</h2>
-    <ul>
-      <li>Python</li>
-      <li>JavaScript</li>
-      <li>React</li>
-    </ul>
-  </section>
+    <section>
+      <h2>À propos</h2>
+      <p>
+        Décris ici ton profil en quelques lignes : formation, spécialités,
+        objectifs professionnels, technologies préférées et type de poste recherché.
+      </p>
+    </section>
 
-  <section>
-    <h2>Projets</h2>
-    <p>Liste de tes projets GitHub.</p>
-  </section>
+    <section>
+      <h2>Compétences</h2>
+      <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Python</span>
+        <span>Git</span>
+        <span>GitHub</span>
+        <span>React</span>
+        <span>SQL</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Expériences</h2>
+
+      <div class="item">
+        <h3>Nom du poste / Projet / Stage</h3>
+        <p class="date">2024 - 2025</p>
+        <p>
+          Décris brièvement ce que tu as fait, les technologies utilisées
+          et les résultats obtenus.
+        </p>
+      </div>
+
+      <div class="item">
+        <h3>Formation / Diplôme</h3>
+        <p class="date">2023 - 2026</p>
+        <p>
+          Nom de l’école, spécialité, matières importantes, projets réalisés.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projets GitHub</h2>
+
+      <div class="projects">
+
+        <article class="project-card">
+          <h3>Nom du projet 1</h3>
+          <p>
+            Courte description du projet : objectif, fonctionnalités principales
+            et problème résolu.
+          </p>
+          <p class="tech">HTML · CSS · JavaScript</p>
+          <a href="https://github.com/tonpseudo/projet-1" target="_blank">
+            Voir sur GitHub
+          </a>
+        </article>
+
+        <article class="project-card">
+          <h3>Nom du projet 2</h3>
+          <p>
+            Exemple : application web, script Python, dashboard, API,
+            jeu, bot ou outil personnel.
+          </p>
+          <p class="tech">Python · Flask · SQLite</p>
+          <a href="https://github.com/tonpseudo/projet-2" target="_blank">
+            Voir sur GitHub
+          </a>
+        </article>
+
+        <article class="project-card">
+          <h3>Nom du projet 3</h3>
+          <p>
+            Ajoute ici un autre projet important avec une description claire
+            et concise.
+          </p>
+          <p class="tech">React · Node.js · GitHub Pages</p>
+          <a href="https://github.com/tonpseudo/projet-3" target="_blank">
+            Voir sur GitHub
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    <a href="https://github.com/tonpseudo">GitHub</a>
-    <a href="https://linkedin.com">LinkedIn</a>
+    <p>© 2026 Ton Prénom Nom — Portfolio GitHub Pages</p>
   </footer>
 
 </body>
