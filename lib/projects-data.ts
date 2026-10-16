@@ -11,6 +11,7 @@ export interface Project {
   slides?: string | null;
   ongoing?: boolean;
   notable?: boolean;
+  notableRank?: number;
   abstract: string;
   type: string;
   publication?: string;
@@ -36,6 +37,7 @@ export const allProjects: Project[] = [
       "PyTorch",
     ],
     date: "2026",
+    notableRank: 4,
     image: "/medvae-x/pipeline-robustness.jpg",
     codeUrl: "https://github.com/yrothlin-03/MEDVAE-X",
     paper: "/medvae-x/report.pdf",
@@ -138,6 +140,7 @@ export const allProjects: Project[] = [
       "Deep Learning",
     ],
     date: "Nov 2025",
+    notableRank: 3,
     image: "/motion-deblurring/demo-deblur2.png",
     codeUrl: "https://github.com/yrothlin-03/Motion_Deblurring",
     paper: "/motion-deblurring/report.pdf",
@@ -184,6 +187,7 @@ export const allProjects: Project[] = [
       "PyTorch",
     ],
     date: "Jul – Sep 2026",
+    notableRank: 1,
     image: "/eeg-foundation-model/model-pipeline.png",
     codeUrl: "https://github.com/yrothlin-03/EEG_FoundationModel",
     paper: "/eeg-foundation-model/report.pdf",
@@ -212,6 +216,52 @@ export const allProjects: Project[] = [
         content:
           "A research-direction encoder combines channel-wise patch tokenization, hierarchical spatial attention informed by electrode geometry, bidirectional Mamba2 temporal processing, and a learned-query global readout. Its self-supervised training aligns global and local EEG views with a non-contrastive LeJEPA objective and SIGReg regularization. The training did not converge within the internship timeframe, so this architecture remains a direction for controlled future evaluation.",
         image: "/eeg-foundation-model/training-pipeline.png",
+      },
+    ],
+  },
+  {
+    slug: "eeg-rqvae",
+    title: "EEG-RQVAE: Discrete EEG Foundation Model",
+    description:
+      "Residual-quantized variational autoencoder for self-supervised EEG representation learning, combining denoising reconstruction, latent JEPA adaptation, and a Mamba backbone.",
+    tags: [
+      "Deep Learning",
+      "EEG",
+      "Self-Supervised Learning",
+      "Mamba",
+      "PyTorch",
+    ],
+    date: "2026",
+    notableRank: 2,
+    image: "/eeg-rqvae/architecture.png",
+    codeUrl: "https://github.com/yrothlin-03/EEG-RQVAE",
+    paper: "/eeg-rqvae/report.pdf",
+    abstract:
+      "EEG-RQVAE is a foundation model for multichannel EEG that learns discrete, hierarchical token sequences through residual vector quantization. Its two-stage training first combines denoising reconstruction, spectral matching, vector-quantization commitment, and adversarial losses, then freezes the decoder and codebook for a JEPA-style latent-prediction stage. A subject-independent linear-probing benchmark across twelve BCI datasets shows that the frozen RVQ-Mamba encoder is the most consistent evaluated variant, with strong results on motor imagery, emotion recognition, pathology detection, and sleep staging.",
+    type: "Research Project",
+    publication: "Manuscript under review, 2026",
+    sections: [
+      {
+        title: "Residual-Quantized EEG Autoencoder",
+        content:
+          "Raw EEG windows are processed by a channel adaptor and a spatio-temporal backbone, then compressed into a latent sequence discretized across multiple residual vector-quantization stages. The resulting hierarchical tokens can support both generative reconstruction and discriminative downstream tasks. Bidirectional Mamba blocks offer linear-time modelling of long multichannel recordings, with CrissCross-attention variants used for comparison.",
+        image: "/eeg-rqvae/architecture.png",
+      },
+      {
+        title: "Two-Stage Self-Supervised Pretraining",
+        content:
+          "Stage 1 learns robust representations by reconstructing clean targets from independently corrupted EEG windows, using time-domain, multi-scale spectral, quantization, and adversarial objectives. In Stage 2, the decoder and codebook are frozen while a JEPA objective predicts masked latent blocks from visible context using an EMA target encoder, shifting the representation toward semantic structure without signal-level reconstruction pressure.",
+        image: "/eeg-rqvae/pipeline.png",
+      },
+      {
+        title: "Subject-Independent Evaluation and Analysis",
+        content:
+          "A unified linear-probing protocol evaluates frozen encoders on twelve datasets and handles heterogeneous montages through learned raw-channel adaptation or 10–20 mapping. RVQ-Mamba is best or second-best on every reported benchmark task. Reconstruction, power-spectral-density, and temporal-consistency analyses show that Stage 1 preserves signal fidelity, while latent JEPA is the component that improves semantic neighbourhood structure.",
+        images: [
+          "/eeg-rqvae/reconstruction-comparison.png",
+          "/eeg-rqvae/psd-comparison.png",
+          "/eeg-rqvae/temporal-consistency.png",
+        ],
       },
     ],
   },

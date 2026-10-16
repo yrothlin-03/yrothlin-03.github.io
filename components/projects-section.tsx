@@ -3,16 +3,9 @@ import { ProjectCard } from "./project-card";
 import { ArrowRight } from "lucide-react";
 import { allProjects } from "@/lib/projects-data";
 
-const notableProjects = [
-  ...allProjects.filter(
-    (project) =>
-      project.slug === "eeg-foundation-model" && project.notable !== false,
-  ),
-  ...allProjects.filter(
-    (project) =>
-      project.slug !== "eeg-foundation-model" && project.notable !== false,
-  ),
-].slice(0, 4);
+const notableProjects = allProjects
+  .filter((project) => project.notableRank !== undefined)
+  .sort((first, second) => first.notableRank! - second.notableRank!);
 
 export function ProjectsSection() {
   return (
