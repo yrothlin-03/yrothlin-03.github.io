@@ -9,35 +9,37 @@ export function AboutSection() {
 
         <div className="space-y-6 text-muted-foreground leading-relaxed">
           <p>
-            Currently finishing my engineering degree at{" "}
-            <span className="text-foreground font-medium">Telecom Paris</span>,
-            I've built a solid foundation in applied mathematics and computer
-            science. My focus? Making machines see and understand the world
-            around them through{" "}
+            I am completing an engineering degree at{" "}
+            <span className="text-foreground font-medium">Télécom Paris</span>{" "}
+            while pursuing the{" "}
+            <span className="text-foreground font-medium">
+              MVA Master's Programme at ENS Paris-Saclay
+            </span>
+            . My academic background combines applied mathematics, signal
+            processing, probability, and statistics with{" "}
             <span className="text-foreground font-medium">Computer Vision</span>{" "}
             and{" "}
             <span className="text-foreground font-medium">
-              Artificial Intelligence
+              Machine Learning
             </span>
             .
           </p>
           <p>
-            What excites me most is bridging the gap between theoretical
-            research and practical applications. Whether it's detecting image
-            forgeries, working with large language models, or diving into
-            generative architectures, I'm always looking for problems where math
-            and code can make a real difference.
+            I am particularly interested in research at the intersection of AI,
+            healthcare, and neuroscience. My technical interests include deep
+            learning, self-supervised learning, multimodal models, medical
+            imaging, and multivariate time series.
           </p>
           <p>
-            Right now, I'm deepening my expertise through advanced coursework in
-            Deep Learning, 3D/Video Vision, Object Recognition, NLP, and Signal
-            Processing. Each project is an opportunity to push my understanding
-            further.
+            At Télécom Paris, I have developed a research focus on EEG
+            foundation models and Mamba architectures for time series. The MVA
+            programme is further broadening my work in optimal transport,
+            computer vision, deep learning, reinforcement learning, Bayesian
+            inference, robotics, and large language models.
           </p>
           <p>
-            Outside of code, you'll find me exploring new music, playing
-            football, or hunting for the next interesting hackathon to join. I
-            believe the best ideas often come from unexpected places.
+            Outside research, I enjoy running, road cycling, swimming, tennis,
+            and playing piano.
           </p>
         </div>
       </div>

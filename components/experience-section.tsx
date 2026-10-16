@@ -1,109 +1,141 @@
-"use client";
+import Image from "next/image";
 
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+type TimelineItem = {
+  title: string;
+  place: string;
+  period: string;
+  description: string;
+  highlights?: string[];
+  link?: string;
+  logo?: string;
+};
 
-const timeline = [
+const education: TimelineItem[] = [
   {
-    label: "EDUCATION",
-    title: "Master of Science in Engineering",
-    place: "Télécom Paris - Institut Polytechnique de Paris",
-    period: "2024 — 2027",
+    title: "M.Sc. MVA — Mathematics, Vision, Learning",
+    link: "https://www.master-mva.com/",
+    place: "ENS Paris-Saclay",
+    period: "Sep 2026 — Apr 2027",
     description:
-      "Télécom Paris is a leading French engineering school specializing in computer science and telecommunications. Coursework includes Deep Learning, Generative Models, 3D/Video Vision, Object Recognition, NLP, Signal Processing, and ML Optimization.",
+      "Mathematics, Vision and Learning master's programme. Coursework includes optimal transport, convex optimization, computer vision, deep learning, reinforcement learning, Bayesian inference, robotics, large language models, and time series.",
   },
   {
-    label: "EDUCATION",
-    title: "Preparatory Classes PCSI / PC*",
-    place: "Lycée du Parc, Lyon",
-    period: "2022 — 2024",
+    title: "Engineering Degree",
+    link: "https://www.telecom-paris.fr/",
+    place: "Télécom Paris (IP Paris) — Palaiseau, France",
+    period: "Sep 2024 — Sep 2027",
     description:
-      "Intensive two-year program focused on Mathematics, Physics, and Computer Science to prepare for the competitive entrance exams to French engineering schools.",
+      "Coursework in probability, information theory, statistics, Fourier analysis, signal processing, physics, telecommunications, computer vision, and image processing.",
+    highlights: [
+      "Research track during the second year on Mamba applications for time series and EEG foundation models, under the supervision of Van-Tam Nguyen.",
+      "One-week intensive programme in medical robotics at Télécom Physique Strasbourg.",
+    ],
   },
   {
-    label: "EXPERIENCE",
-    title: "Humanitarian Internship",
-    place: "Polytechnique, Palaiseau",
-    period: "Jul — Aug 2025",
+    title: "CPGE — MPSI / PSI*",
+    place: "Lycée privé ORT — Strasbourg, France",
+    period: "Sep 2021 — Jun 2024",
     description:
-      "Books and historical documents restauration internship at the library of the École Polytechnique, involving the preservation and digitization of rare collections.",
-  },
-  {
-    label: "EXPERIENCE",
-    title: "Private Tutor — Mathematics",
-    place: "Self-employed",
-    period: "2024 — Present",
-    description:
-      "Providing personalized mathematics tutoring to high school and preparatory class students, helping them build strong foundations and achieve their academic goals.",
+      "Intensive preparatory programme in mathematics, physics, and engineering sciences. Ranked first in the programme.",
   },
 ];
 
+const experience: TimelineItem[] = [
+  {
+    title: "Research Intern",
+    place: "Télécom Paris (IP Paris) — Palaiseau, France · Hybrid",
+    period: "Jul 2026 — Sep 2026",
+    description:
+      "Research internship under the supervision of Van-Tam Nguyen, investigating EEG foundation models and Mamba architectures.",
+    highlights: [
+      "Benchmarked self-supervised methods and analysed their latent representations.",
+      "Developed a LeJEPA-based architecture combining temporal and spatial modelling with EEG-specific augmentations to better capture physiological structure.",
+    ],
+  },
+  {
+    title: "Mathematics and Physics Tutor",
+    link: "/projects/mathematics-physics-cpge",
+    logo: "/mathematics-physics-cpge/logo.png",
+    place: "Strasbourg, France",
+    period: "Sep 2024 — Present",
+    description:
+      "Mentoring preparatory-class students in mathematics and physics, and conducting mock oral examinations for competitive entrance examinations.",
+  },
+];
+
+function TimelineList({ title, items }: { title: string; items: TimelineItem[] }) {
+  return (
+    <div>
+      <h2 className="mb-8 border-b border-border pb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        {title}
+      </h2>
+      <div className="space-y-8">
+        {items.map((item) => (
+          <article
+            key={`${item.title}-${item.period}`}
+            className="rounded-2xl border border-border bg-card p-7 sm:p-8"
+          >
+            <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+              <h4 className="text-2xl font-bold text-foreground">
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    target={item.link.startsWith("http") ? "_blank" : undefined}
+                    rel={item.link.startsWith("http") ? "noreferrer" : undefined}
+                    className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  item.title
+                )}
+              </h4>
+              <div className="flex shrink-0 items-center gap-3 self-end sm:self-auto">
+                <span className="text-sm font-mono text-muted-foreground">
+                  {item.period}
+                </span>
+                {item.logo && (
+                  <a
+                    href={item.link}
+                    aria-label={`View ${item.title} project`}
+                    className="rounded-md transition-opacity hover:opacity-70"
+                  >
+                    <Image
+                      src={item.logo}
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 object-contain"
+                    />
+                  </a>
+                )}
+              </div>
+            </div>
+            <p className="mb-4 text-lg text-muted-foreground">{item.place}</p>
+            <p className="max-w-3xl leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+            {item.highlights && (
+              <ul className="mt-4 max-w-3xl list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+                {item.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ExperienceSection() {
-  const [index, setIndex] = useState(0);
-
-  const next = () => setIndex((prev) => (prev + 1) % timeline.length);
-  const prev = () =>
-    setIndex((prev) => (prev - 1 + timeline.length) % timeline.length);
-
   return (
     <section id="experience" className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold text-foreground mb-12">
-          Education & Experience
-        </h2>
-
-        <div className="bg-card border border-border rounded-2xl p-10 min-h-[320px] flex flex-col justify-center">
-          <span className="text-xs font-mono text-muted-foreground tracking-widest mb-4">
-            {timeline[index].label}
-          </span>
-          <h3 className="text-3xl font-bold text-foreground mb-3">
-            {timeline[index].title}
-          </h3>
-          <p className="text-lg text-muted-foreground mb-2">
-            {timeline[index].place}
-          </p>
-          <span className="text-sm font-mono text-muted-foreground mb-6">
-            {timeline[index].period}
-          </span>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl">
-            {timeline[index].description}
-          </p>
-        </div>
-
-        <div className="flex items-center justify-center gap-6 mt-8">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={prev}
-            className="h-12 w-12 rounded-xl bg-transparent border-border hover:bg-muted"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-
-          {/* Dot indicators */}
-          <div className="flex items-center gap-2">
-            {timeline.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === index
-                    ? "w-6 bg-foreground"
-                    : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
-                }`}
-              />
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={next}
-            className="h-12 w-12 rounded-xl bg-transparent border-border hover:bg-muted"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+        <div className="space-y-16">
+          <TimelineList title="Education" items={education} />
+          <TimelineList title="Experience" items={experience} />
         </div>
       </div>
     </section>

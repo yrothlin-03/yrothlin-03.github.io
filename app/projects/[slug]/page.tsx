@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText, Presentation } from "lucide-react";
 import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects-data";
 import { Footer } from "@/components/footer";
 
@@ -37,7 +37,7 @@ export default async function ProjectPage({
           {/* Main Content */}
           <div className="flex-1 max-w-3xl">
             {/* Header */}
-            <div className="mb-8">
+            <div className="relative mb-8">
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag) => (
@@ -54,26 +54,74 @@ export default async function ProjectPage({
               </div>
 
               {/* Title */}
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                {project.ongoing && (
-                  <span className="text-muted-foreground">[Ongoing] </span>
+              <div className="mb-4 pr-52">
+                <h1 className="text-3xl font-bold text-foreground md:text-4xl">
+                  {project.ongoing && (
+                    <span className="text-muted-foreground">[Ongoing] </span>
+                  )}
+                  {project.title}
+                </h1>
+                {project.imageSize === "small" && (
+                  <Image
+                    src={project.image}
+                    alt=""
+                    width={176}
+                    height={176}
+                    className="absolute right-0 top-0 h-44 w-44 object-contain"
+                  />
                 )}
-                {project.title}
-              </h1>
+              </div>
 
               {/* Date */}
               <p className="text-muted-foreground">{project.date}</p>
+
+              {(project.codeUrl || project.paper || project.slides) && (
+                <div className="mt-5 flex flex-wrap gap-4">
+                  {project.codeUrl && (
+                    <Link
+                      href={project.codeUrl}
+                      target="_blank"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity font-medium"
+                    >
+                      <ExternalLink size={16} />
+                      View Code
+                    </Link>
+                  )}
+                  {project.paper && (
+                    <Link
+                      href={project.paper}
+                      target="_blank"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-muted transition-colors font-medium"
+                    >
+                      <FileText size={16} />
+                      Read Report
+                    </Link>
+                  )}
+                  {project.slides && (
+                    <Link
+                      href={project.slides}
+                      target="_blank"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-muted transition-colors font-medium"
+                    >
+                      <Presentation size={16} />
+                      View Slides
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Hero Image */}
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-muted mb-10">
-              <Image
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                fill
-                className="object-cover"
-              />
-            </div>
+            {project.imageSize !== "small" && (
+              <div className="relative mb-10 aspect-video overflow-hidden rounded-xl bg-muted">
+                <Image
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
             {/* Abstract Section */}
             <section id="abstract" className="mb-10">
@@ -148,31 +196,6 @@ export default async function ProjectPage({
               </section>
             ))}
 
-            {/* Links */}
-            {(project.codeUrl || project.paper) && (
-              <div className="flex flex-wrap gap-4 pt-6 border-t border-border">
-                {project.codeUrl && (
-                  <Link
-                    href={project.codeUrl}
-                    target="_blank"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity font-medium"
-                  >
-                    <ExternalLink size={16} />
-                    View Code
-                  </Link>
-                )}
-                {project.paper && (
-                  <Link
-                    href={project.paper}
-                    target="_blank"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-muted transition-colors font-medium"
-                  >
-                    <FileText size={16} />
-                    Read Report
-                  </Link>
-                )}
-              </div>
-            )}
           </div>
 
           {/* Sidebar - On this page */}

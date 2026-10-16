@@ -14,13 +14,11 @@ export function Header() {
     setMounted(true)
   }, [])
 
-  const ThemeIcon = mounted && theme === "dark" ? Sun : Moon
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-xl font-semibold tracking-tight text-foreground">
-          Yanic Rothlingshofer
+          Yanic Röthlingshöfer
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -39,15 +37,12 @@ export function Header() {
           <Link href="/projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             All Projects
           </Link>
-          <Link href="/prepa" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Prepa
-          </Link>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-muted transition-colors"
             aria-label="Toggle theme"
           >
-            <ThemeIcon size={18} />
+            {mounted && theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
         </nav>
 
@@ -57,7 +52,7 @@ export function Header() {
             className="p-2 rounded-full hover:bg-muted transition-colors"
             aria-label="Toggle theme"
           >
-            <ThemeIcon size={18} />
+            {mounted && theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -105,13 +100,6 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             All Projects
-          </Link>
-          <Link
-            href="/prepa"
-            className="text-sm text-muted-foreground hover:text-foreground"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Prepa
           </Link>
         </nav>
       )}
